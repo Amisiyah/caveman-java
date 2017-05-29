@@ -12,10 +12,10 @@ import com.ponta.tutorial.window.Game.GameState;
 
 public class Menu implements KeyListener{
 	
-	String options[] = {"Start", "About", "Exit"};
+	protected String options[] = {"Start", "About", "Exit"};
 	protected int currentOption = 0;
-	Game game;
-	Color menuBar = new Color(0, 0, 0, 150);
+	protected Game game;
+	protected Color menuBar = new Color(0, 0, 0, 150);
 	
 	public Menu(Game game){
 		this.game = game;

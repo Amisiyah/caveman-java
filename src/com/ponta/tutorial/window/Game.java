@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable{
 		level = loader.loadImage("/level.png"); //loading the level
 		clouds = loader.loadImage("/clouds.png"); // loading background
 		cam = new Camera(0,0);
-		handler = new Handler(cam);
+		handler = new Handler(cam, this);
 		handler.LoadImageLevel(level);
 		this.addKeyListener(new KeyInput(handler));
 	}
@@ -134,7 +134,6 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case MENU:
 				menu.render(g);
-				break;
 		}
 		
 		g.dispose();
@@ -143,6 +142,8 @@ public class Game extends Canvas implements Runnable{
 		
 	public static Texture getInstance() { return tex; }	
 	public static void main(String args[]) { new Window(800, 600, "Man of the past", new Game()); }
+	
+	public void setMenu(Menu menu) { this.menu = menu; }
 	
 	public enum GameState { INGAME, MENU } 
 	

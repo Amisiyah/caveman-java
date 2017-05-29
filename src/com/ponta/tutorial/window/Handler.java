@@ -21,14 +21,18 @@ public class Handler
 	private GameObject tempObject;	
 	private Camera cam;	
 	private BufferedImage level2 = null , level3 = null;	
-	public Handler(Camera cam)
-	{
+
+	public Game game;
+	
+	public Handler(Camera cam, Game game){
+		this.game = game;
 		this.cam = cam;		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level2 = loader.loadImage("/level2.png"); //loading the level 2
 		level3 = loader.loadImage("/level3.png"); //loading the level 3)
 	}
 	
+
 	public void tick()
 	{
 		for(int i = 0;i < object.size();i++)	{

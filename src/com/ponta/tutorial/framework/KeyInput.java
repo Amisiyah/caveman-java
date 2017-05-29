@@ -5,8 +5,9 @@ import java.awt.event.KeyEvent;
 
 import com.ponta.tutorial.objects.Bullet;
 import com.ponta.tutorial.window.Game;
-import com.ponta.tutorial.window.Handler;
 import com.ponta.tutorial.window.Game.GameState;
+import com.ponta.tutorial.window.Handler;
+import com.ponta.tutorial.window.screens.Inventory;
 
 public class KeyInput extends KeyAdapter 
 {
@@ -33,9 +34,16 @@ public class KeyInput extends KeyAdapter
 					}
 				
 				}
+
 				if(key == KeyEvent.VK_ESCAPE){
 					Game.state = GameState.MENU;
 				}
+				
+				if(key == KeyEvent.VK_E){
+					Game.state = GameState.MENU;
+					handler.game.setMenu(new Inventory(handler.game));
+				}
+				
 			}
 		}
 	}
