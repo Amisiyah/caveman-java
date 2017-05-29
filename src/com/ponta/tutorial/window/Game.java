@@ -13,11 +13,16 @@ import com.ponta.tutorial.framework.KeyInput;
 import com.ponta.tutorial.framework.ObjectId;
 import com.ponta.tutorial.framework.Texture;
 import com.ponta.tutorial.objects.PlayerStats;
+import com.ponta.tutorial.window.screens.Menu;
 
 public class Game extends Canvas implements Runnable{	
-	private final Font font = new Font("TimesRoman", Font.BOLD, 20);	
+	public static final Font font = new Font("TimesRoman", Font.BOLD, 20);	
 	private static final long serialVersionUID = -8511450172027928061L;
 
+	public static GameState state = GameState.MENU;
+	
+	public Menu menu = new Menu(this);
+	
 	private boolean running = false;
 	private Thread thread;	
 	public static int WIDTH,HEIGHT;	
@@ -85,13 +90,13 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
-	private void tick()
-	{
-		handler.tick();
-		for(int i=0 ; i < handler.object.size() ; i++)
-		{
-			if(handler.object.get(i).getId() == ObjectId.Player){
-				cam.tick(handler.object.get(i));
+	private void tick(){
+		if(state == GameState.INGAME){
+			handler.tick();
+			for(int i=0 ; i < handler.object.size() ; i++){
+				if(handler.object.get(i).getId() == ObjectId.Player){
+					cam.tick(handler.object.get(i));
+				}
 			}
 		}
 	}
@@ -107,30 +112,38 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) g;		
 		//Draw here
+		switch(state){
+			case INGAME:
+				g.setColor(new Color(112,199,240));
+				g.fillRect(0, 0, getWidth(), getHeight());		
+				g2d.translate(cam.getX(), cam.getY()); //begin of cam
+					
+					for(int xx = 0 ; xx < clouds.getWidth() * 3 ; xx += clouds.getWidth())
+						g.drawImage(clouds, xx, 50, this);
+					handler.render(g);
+				
+				g2d.translate(-cam.getX(), -cam.getY()); // end of cam
+				
+			    g.setFont(font);	     
+			    g.setColor(Color.BLACK);	    
+			    g.drawString("Coins: " + PlayerStats.coins, 16, 16);
+			    
+			    for(int i = 0; i < PlayerStats.hp; i++){
+					g.drawImage(tex.hp[0], 16 + i * 16, 24, 32, 32, null);
+			    }
+				break;
+			case MENU:
+				menu.render(g);
+				break;
+		}
 		
-		g.setColor(new Color(112,199,240));
-		g.fillRect(0, 0, getWidth(), getHeight());		
-		g2d.translate(cam.getX(), cam.getY()); //begin of cam
-			
-			for(int xx = 0 ; xx < clouds.getWidth() * 3 ; xx += clouds.getWidth())
-				g.drawImage(clouds, xx, 50, this);
-			handler.render(g);
-		
-		g2d.translate(-cam.getX(), -cam.getY()); // end of cam
-		
-	    g.setFont(font);	     
-	    g.setColor(Color.BLACK);	    
-	    g.drawString("Coins: " + PlayerStats.coins, 16, 16);
-	    
-	    for(int i = 0; i < PlayerStats.hp; i++){
-			g.drawImage(tex.hp[0], 16 + i * 16, 24, 32, 32, null);
-	    }
-		
-
 		g.dispose();
 		bs.show();
 	}
 		
 	public static Texture getInstance() { return tex; }	
 	public static void main(String args[]) { new Window(800, 600, "Man of the past", new Game()); }
+	
+	public enum GameState { INGAME, MENU } 
+	
 }

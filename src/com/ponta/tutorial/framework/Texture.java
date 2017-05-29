@@ -8,6 +8,8 @@ public class Texture
 {
 	SpriteSheet bs, ps, cs, ls, lsI, ml, hs, mil, cl;
 	
+	private BufferedImage menuBg = null;
+
 	private BufferedImage block_sheet = null;
 	private BufferedImage player_sheet = null;
 	private BufferedImage coins_sheet = null;
@@ -43,6 +45,8 @@ public class Texture
 			hp_sheet = loader.loadImage("/life.png");
 			mistret_sheet = loader.loadImage("/mistret.png");
 			cave_sheet = loader.loadImage("/cave.png");
+			
+			menuBg = loader.loadImage("/menuBg.jpg");
 		}catch(Exception e){
 			e.printStackTrace();
 		}		
@@ -121,4 +125,6 @@ public class Texture
 		// hp
 		hp[0] = hs.grabImage(1, 1, 32, 32);
 	}
+	
+	public BufferedImage getMenuBackground(){ return menuBg; }
 }
