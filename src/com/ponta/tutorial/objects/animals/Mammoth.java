@@ -14,10 +14,10 @@ public class Mammoth extends Animals{
 
 	public Mammoth(float x, float y, Handler handler, Camera cam, ObjectId id) {
 		super(x, y, handler, cam, id);
-		width = 82;
-		height = 46;
+		width = 135;
+		height = 66;
 		velX = 1;
-		animalsAnimation = new Animation(5, tex.mammoth[0]);
+		animalsAnimation = new Animation(5, tex.mammoth[0], tex.mammoth[1], tex.mammoth[2]);
 	}
 	
 	public void tick(LinkedList<GameObject> object) {

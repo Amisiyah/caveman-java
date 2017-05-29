@@ -27,7 +27,7 @@ public class Texture
 	public BufferedImage[] lavaI = new BufferedImage[3];
 	public BufferedImage[] lavaII = new BufferedImage[3];
 	public BufferedImage[] player_jump = new BufferedImage[6];
-	public BufferedImage[] mammoth = new BufferedImage[1];
+	public BufferedImage[] mammoth = new BufferedImage[3];
 	public BufferedImage[] hp = new BufferedImage[1];
 	public BufferedImage[] mistret = new BufferedImage[3];
 	public BufferedImage[] cave = new BufferedImage[1];
@@ -110,7 +110,9 @@ public class Texture
 		player[12] = ps.grabImage(15, 1, 32, 64); 
 		player[13] = ps.grabImage(14, 1, 32, 64); 
 		//mammoth
-		mammoth[0] = ml.grabImage(1, 1, 82, 47);
+		mammoth[0] = ml.grabImage(1, 1, 135, 66);
+		mammoth[1] = ml.grabImage(2, 1, 135, 66);
+		mammoth[2] = ml.grabImage(3, 1, 135, 66);
 		//mistret
 		mistret[0] = mil.grabImage(1, 1, 81, 63);
 		mistret[1] = mil.grabImage(2, 1, 81, 63);
